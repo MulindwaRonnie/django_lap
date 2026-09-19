@@ -2,6 +2,7 @@ from django.conf import settings # import the projects settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from taggit.managers import TaggableManager
 #from django.db.models.functions import Now # In case we want to use database default values instead of timezone
 
 class PublishedManager(models.Manager):
@@ -33,6 +34,7 @@ class Post(models.Model):
     )
     objects = models.Manager() # the default manager
     published = PublishedManager() # Our custom manager
+    tags = TaggableManager() # allows us to add,retrieve and remove tags from post objects
 
     class Meta: # define our own ordering for the posts
         ordering = ['-publish'] # order depends on the publish field and its in reverse chronological order
